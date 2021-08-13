@@ -1,17 +1,17 @@
 class ViewsDataPresenter
-  def initialize(views_data)
-    @views_data = views_data
+  def initialize(views_count)
+    @views_count = views_count
   end
 
-  def display
-    sort(views_data[:all]).map { |row| display_views_row(row) } +
+  def all_data
+    sort(views_count.total).map { |row| display_total_views_row(row) } +
     separator +
-    sort(views_data[:unique]).map { |row| display_unique_views_row(row) }
+    sort(views_count.unique).map { |row| display_unique_views_row(row) }
   end
 
   private
 
-  attr_reader :views_data
+  attr_reader :views_count
 
   def separator
     ["", "-" * 32, ""]
@@ -21,7 +21,7 @@ class ViewsDataPresenter
     data.sort_by(&:last).reverse
   end
 
-  def display_views_row(row)
+  def display_total_views_row(row)
     display_row(row) + " visits"
   end
 
